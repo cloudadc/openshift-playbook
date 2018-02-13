@@ -1,0 +1,29 @@
+- name: create VG docker-vg for node1 and node2
+  lvg:
+    vg: docker-vg
+    pvs: /dev/vdb
+    pesize: 32
+  when: ansible_hostname=="node1" or ansible_hostname=="node2"
+
+- name: add config to /etc/sysconfig/docker-storage-setup
+  shell: echo VG=docker-vg > /etc/sysconfig/docker-storage-setup
+  when: ansible_hostname=="node1" or ansible_hostname=="node2"
+
+- name: run docker-storage-setup command
+  shell: docker-storage-setup 
+  when: ansible_hostname=="node1" or ansible_hostname=="node2"
+
+- name: extend docker-pool to use all free space
+  lvol:
+    vg: docker-vg
+    lv: docker-pool
+    size: +100%FREE
+    force: yes
+  when: ansible_hostname=="node1" or ansible_hostname=="node2"
+
+- name: start docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+#  when: ansible_hostname=="node1" or ansible_hostname=="node2"

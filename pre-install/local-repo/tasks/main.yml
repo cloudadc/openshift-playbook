@@ -1,0 +1,35 @@
+- name: Add repository
+  yum_repository:
+    name: rhel-7-server-rpms
+    description: rhel-7-server-rpms
+    file: ose
+    baseurl: http://yum.example.com/ose/rhel-7-server-rpms
+    gpgcheck: no
+    enabled: yes
+
+- name: Add  RHEL extra repository
+  yum_repository:
+    name: rhel-7-server-extras-rpms
+    description: rhel-7-server-extras-rpms
+    file: ose
+    baseurl: http://yum.example.com/ose/rhel-7-server-extras-rpms
+    gpgcheck: no
+    enabled: yes
+
+- name: Add RHEL OSE repository
+  yum_repository:
+    name: rhel-7-server-ose-3.7-rpms
+    description: rhel-7-server-ose-3.7-rpms
+    file: ose
+    baseurl: http://yum.example.com/ose/rhel-7-server-ose-3.7-rpms
+    gpgcheck: no
+    enabled: yes
+     
+- name: Add RHEL fast-datapath repository
+  yum_repository:
+    name: rhel-7-fast-datapath-rpms
+    description: rhel-7-fast-datapath-rpms
+    file: ose
+    baseurl: http://yum.example.com/ose/rhel-7-fast-datapath-rpms
+    gpgcheck: no
+    enabled: yes

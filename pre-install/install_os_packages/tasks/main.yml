@@ -1,0 +1,81 @@
+- name: install necessary system packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - nfs-utils
+      - net-tools
+      - ntp
+- name: Modify all compute nodes ntp.conf
+  template:
+    src: ntp.conf
+    dest: /etc/ntp.conf
+    backup: yes
+  when: ansible_hostname!="master" or ansible_hostname!="registry"
+  notify:
+  - restart nodes ntpd
+
+- name: Modify master's ntpd.conf to make it as an NTP server
+  template:
+    src: ntp_server.conf
+    dest: /etc/ntp.conf
+    backup: yes
+  when: ansible_hostname=="master"
+  notify: 
+  - restart master ntpd
+
+- name: start ntpdate daemon at boot time
+  service: 
+    name: ntpdate
+    enabled: yes
+
+- name: install docker and ose
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - docker
+      - wget
+      - git
+      - bind-utils
+      - iptables-services
+      - bridge-utils
+      - bash-completion
+      - vim
+      - atomic-openshift-excluder
+      - atomic-openshift-docker-excluder
+      - unzip
+      - atomic-openshift-utils
+      - kexec-tools
+      - sos
+      - psacct
+      - dnsmasq
+
+- name: add A record to dnsmasq
+  template:
+    src: openshift-cluster.conf
+    dest: /etc/dnsmasq.d/openshift-cluster.conf
+  notify:
+  - restart dnsmasq 
+
+- name: update local resolve.conf
+  lineinfile:
+    path: /etc/sysconfig/network-scripts/ifcfg-eth0
+    regexp: 'DNS1='
+    line:  'DNS1={{IP}}'
+  when: ansible_hostname!="registry"
+  notify:
+  - restart NetworkManager
+
+
+#- name: start docker service & make sure docker running after reboot
+#  service:
+#    name: docker
+#    state: started
+#    enabled: yes
+
+- name: install ansible
+  yum:
+    name: ansible
+    state: present
+  when: ansible_hostname=="master"

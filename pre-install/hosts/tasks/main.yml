@@ -1,0 +1,7 @@
+- name: update /etc/hosts for all nodes
+  copy:
+    src: hosts
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644

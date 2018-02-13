@@ -1,0 +1,5 @@
+- name: disable yum exclude in yum.conf
+  lineinfile:
+    path: /etc/yum.conf
+    regexp: '^exclude='
+    line:  'exclude='

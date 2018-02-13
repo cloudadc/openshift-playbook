@@ -1,0 +1,9 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.122.101	master.example.com	master
+192.168.122.105	node1.example.com	node1
+192.168.122.106	node2.example.com	node2
+10.66.192.2	registry.example.com	registry
+10.66.192.2	yum.example.com	
+10.66.192.2	nfs.example.com	
+10.66.192.89	gitlab.example.com	

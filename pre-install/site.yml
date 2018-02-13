@@ -1,0 +1,15 @@
+---
+- hosts: ose
+  vars:
+    IP: "{{ ansible_eth0['ipv4']['address'] }}"
+  roles:
+         - local-repo
+         - install_os_packages
+         - selinux
+         - firewalld
+         - hosts
+#         - docker-storage
+         - ssh_key
+         - registry
+         - ose
+         - yum_conf

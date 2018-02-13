@@ -1,0 +1,17 @@
+- name: restart nodes ntpd
+  service: name=ntpd state=restarted
+  when: ansible_hostname!="master01"
+
+- name: restart master ntpd
+  service: name=ntpd state=restarted
+  when: ansible_hostname=="master01"
+
+- name: restart dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted
+
+#- name: restart NetworkManager
+#  service:
+#    name: NetworkManager
+#    state: restarted 
