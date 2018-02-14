@@ -1,5 +1,5 @@
 - name: update /etc/hosts for all nodes
-  copy:
+  template:
     src: hosts
     dest: /etc/hosts
     owner: root

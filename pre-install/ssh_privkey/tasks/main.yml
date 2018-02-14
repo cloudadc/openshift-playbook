@@ -1,0 +1,7 @@
+- name: Copy SSH private key to master
+  copy:
+    src: id_rsa
+    dest: /root/.ssh/id_rsa
+    owner: root
+    group: root
+    mode: 0400      

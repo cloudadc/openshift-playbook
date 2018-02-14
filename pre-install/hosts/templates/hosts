@@ -1,0 +1,6 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+{{ip.0}}	{{fqdn.0}}	{{shorts_name.0}}
+{{ip.1}}	{{fqdn.1}}	{{shorts_name.1}}
+{{ip.2}}	{{fqdn.2}}	{{shorts_name.2}}
+{{ip.3}}	{{fqdn.3}}	{{shorts_name.3}}

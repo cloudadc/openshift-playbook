@@ -1,0 +1,5 @@
+- name: modified registries.conf on All nodes except Registry server
+  template:
+    src: registries.conf
+    dest: /etc/containers/registries.conf
+    backup: yes

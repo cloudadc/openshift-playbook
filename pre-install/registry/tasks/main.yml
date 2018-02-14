@@ -4,68 +4,28 @@
     state: present
   with_items:
       - docker-distribution
-  when: ansible_hostname=="registry"
 
 - name: start docker registry service  running after reboot
   service:
     name: docker-distribution
-    state: started
+    state: restarted
     enabled: yes
-  when: ansible_hostname=="registry"
 
-#- name: create nfs mount dir for images
-#  file:
-#    path: /opt/images
-#    state: directory
-#    mode: 0755
-#  when: ansible_hostname=="registry"
-
-#- name: mount docker images from nfs server
-#  mount:
-#    path: /opt/images
-#    src: 192.168.122.1:/mnt/data/images
-#    fstype: nfs
-#    state: mounted
-#  when: ansible_hostname=="registry"
-
-- name: load images to registry
-  shell: for i in `ls *.tar` ; do docker load -i $i; done;
-  args:
-    chdir: /opt/images  
-  when: ansible_hostname=="registry"
-
-
-- name: modify registry server's docker config file
-  shell: sed  -i s/".*OPTIONS=.*"/"OPTIONS='--selinux-enabled --log-driver=json-file --signature-verification=false --insecure-registry registry.example.com:5000'"/g /etc/sysconfig/docker;
-
-- name: modified registries.conf on All nodes except Registry server
-  copy:
-    src: registries.conf
-    dest: /etc/containers/registries.conf
-    backup: yes
-  when: ansible_hostname!="registry"
-
-
-- name: restart docker service on all nodes
+- name: start docker  service  running after reboot
   service:
     name: docker
     state: restarted
     enabled: yes
 
-- name: create tag for images
-  shell: for i in $(docker images|grep registry.access.redhat.com|awk '{print $1":"$2}') ; do docker tag  $i "registry.example.com:5000$(echo $i|awk -F 'com' {'print $2'})" ; done;
-  when: ansible_hostname=="registry"
+- name: create nfs mount dir for images
+  file:
+    path: /opt/images
+    state: directory
+    mode: 0755
 
-- name: push images to local registry
-  shell: for i in `docker images|grep registry.example.com:5000|awk '{print $1":"$2}'` ; do docker push $i; done;
-  when: ansible_hostname=="registry"
-
-- name: delete redhat's official image tag
-  shell: for i in $(docker images|grep registry.access.redhat.com|awk '{print $1":"$2}') ; do docker rmi  $i ; done; 
-  when: ansible_hostname=="registry"
-
-  #- name: restart docker service
-  #service:
-  #  name: docker
-  #  state: restarted
-  #  enabled: yes
+- name: mount docker images from nfs server
+  mount:
+    path: /opt/images
+    src: 192.168.122.1:/mnt/data/images
+    fstype: nfs
+    state: mounted
