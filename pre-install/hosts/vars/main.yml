@@ -1,0 +1,15 @@
+ip:
+        - 192.168.122.10
+        - 192.168.122.11
+        - 192.168.122.12
+        - 192.168.122.13
+fqdn:
+        - master01.example.com
+        - node1.example.com
+        - node2.example.com
+        - registry.example.com
+shorts_name:
+        - master01
+        - node1
+        - node2
+        - registry

@@ -3,4 +3,3 @@
     src: hosts
     dest: /etc/ansible/hosts
     backup: yes
-  when: ansible_hostname=="master"

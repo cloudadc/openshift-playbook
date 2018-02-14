@@ -1,0 +1,17 @@
+- name: Modify master01's ntpd.conf to make it as an NTP server
+  template:
+    src: ntp_server.conf
+    dest: /etc/ntp.conf
+    backup: yes
+  notify: 
+  - restart ntpd
+
+- name: enable ntp daemon at boot time
+  service: 
+    name: ntpd
+    enabled: yes
+
+- name: start ntpdate daemon at boot time
+  service: 
+    name: ntpdate
+    enabled: yes
