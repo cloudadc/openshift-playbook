@@ -21,3 +21,9 @@ baseurl = {{YUM_REPO.0}}/ose/rhel-7-fast-datapath-rpms
 enabled = 1
 gpgcheck = 0
 name = rhel-7-fast-datapath-rpms
+
+[gitlab]
+baseurl = {{YUM_REPO.0}}/ose/gitlab
+enabled = 1
+gpgcheck = 0
+name = gitlab

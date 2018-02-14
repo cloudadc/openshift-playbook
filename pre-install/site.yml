@@ -29,9 +29,9 @@
   gather_facts: no
   roles:
          - docker-storage
-- hosts: registry
-  gather_facts: no
-  roles:
-         - firewalld
-         - registry
-         - load_images
+           #- hosts: registry
+           #  gather_facts: no
+           #  roles:
+           #         - firewalld
+           #         - registry
+           #         - load_images
