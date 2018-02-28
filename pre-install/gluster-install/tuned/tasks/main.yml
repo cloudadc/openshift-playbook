@@ -1,0 +1,2 @@
+- name: tuning gluster server to rhgs-random-io
+  shell: tuned-adm profile rhgs-random-io

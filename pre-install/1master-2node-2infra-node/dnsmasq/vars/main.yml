@@ -1,0 +1,7 @@
+router_ip:
+        - 192.168.122.14
+IP:
+        - "{{ ansible_eth0['ipv4']['address'] }}"
+interface:
+        - eth0
+

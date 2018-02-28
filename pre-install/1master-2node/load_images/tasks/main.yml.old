@@ -1,0 +1,31 @@
+- name: load images to registry
+  shell: for i in `ls *.tar` ; do docker load -i $i; done;
+  args:
+    chdir: /opt/images  
+
+
+- name: modify registry server's docker config file
+  shell: sed  -i s/".*OPTIONS=.*"/"OPTIONS='--selinux-enabled --log-driver=json-file --signature-verification=false --insecure-registry registry.example.com:5000'"/g /etc/sysconfig/docker;
+
+- name: modified registries.conf on All nodes except Registry server
+  copy:
+    src: registries.conf
+    dest: /etc/containers/registries.conf
+    backup: yes
+  when: ansible_hostname!="registry"
+
+
+- name: restart docker service on all nodes
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
+
+- name: create tag for images
+  shell: for i in $(docker images|grep registry.access.redhat.com|awk '{print $1":"$2}') ; do docker tag  $i "registry.example.com:5000$(echo $i|awk -F 'com' {'print $2'})" ; done;
+
+- name: push images to local registry
+  shell: for i in `docker images|grep registry.example.com:5000|awk '{print $1":"$2}'` ; do docker push $i; done;
+
+- name: delete redhat's official image tag
+  shell: for i in $(docker images|grep registry.access.redhat.com|awk '{print $1":"$2}') ; do docker rmi  $i ; done; 

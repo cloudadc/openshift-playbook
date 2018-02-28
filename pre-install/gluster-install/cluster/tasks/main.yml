@@ -1,0 +1,5 @@
+- name: add gluster-node2 to cluster
+  shell: gluster peer probe gluster-node2.example.com
+
+- name: add gluster-node3 to cluster
+  shell: gluster peer probe gluster-node3.example.com

@@ -1,0 +1,7 @@
+- name: restart atomic master service to make hawkular take affect
+  service:
+    name: "{{item}}"
+    state: restarted
+  with_items:
+      - atomic-openshift-master-api
+      - atomic-openshift-node

@@ -1,0 +1,44 @@
+---
+- hosts: all_node
+  gather_facts: no
+  roles:
+         - local-repo
+         - install_os_packages
+         - hosts
+         - ssh_publickey
+         - registry_client
+
+- hosts: ntp_server 
+  gather_facts: no
+  roles:
+         - ntp_server
+
+- hosts: master
+  gather_facts: no
+  roles:
+         - ssh_privkey
+         - ose
+         - iptables
+
+- hosts: ose
+  roles:
+         - dnsmasq
+         - selinux
+         - firewalld
+
+- hosts: ntp_client
+  gather_facts: no
+  roles:
+         - ntp
+
+- hosts: node
+  gather_facts: no
+  roles:
+         - docker-storage
+
+- hosts: registry
+  gather_facts: no
+  roles:
+         - firewalld
+         - registry
+         - load_images

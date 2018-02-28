@@ -1,0 +1,26 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+192.168.122.10	master01.example.com	master01
+192.168.122.11	node1.example.com	node1
+192.168.122.12	node2.example.com	node2
+192.168.122.13	registry.example.com	registry
+192.168.122.14	infra-node01.example.com	infra-node01
+192.168.122.15	infra-node02.example.com	infra-node02
+192.168.122.14   hawkular-metrics.apps.example.com
+192.168.122.14	kibana.apps.example.com 
+192.168.122.14	registry-console-default.apps.example.com
+192.168.122.14	jenkins-sharedjenkins.apps.example.com 
+192.168.122.14	docker-registry-default.apps.example.com
+192.168.122.14	testweb.apps.example.com
+192.168.122.13	gitlab.example.com	gitlab
+192.168.122.14	blue-bluegreean.apps.example.com
+192.168.122.14	green-bluegreean.apps.example.com
+192.168.122.14	bg.apps.example.com
+192.168.122.14	autoscale-autoscale.apps.example.com
+192.168.122.14	jenkins-autoscale.apps.example.com
+192.168.122.14	demo-httpd.apps.example.com
+
+192.168.122.21	gluster-node1.example.com	gluster-node1
+192.168.122.22	gluster-node2.example.com	gluster-node2
+192.168.122.23	gluster-node3.example.com	gluster-node3

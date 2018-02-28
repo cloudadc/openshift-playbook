@@ -1,0 +1,17 @@
+- name: install gitlab-ee packages on gitlab.example.com
+  yum:
+    name: gitlab-ee
+    state: present
+
+- name: setup gitlab's servername to {{gitlab_servername.0}}
+  template:
+    src: gitlab.rb
+    dest: /etc/gitlab/gitlab.rb
+    backup: yes
+
+- name: setup gitlab
+  shell: 'gitlab-ctl  reconfigure'  
+  
+- name: start gitlab
+  shell: 'gitlab-ctl start'
+

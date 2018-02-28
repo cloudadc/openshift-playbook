@@ -1,0 +1,5 @@
+- name: Copy SSH public key
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', 'id_rsa.pub') }}"

@@ -1,0 +1,4 @@
+- name: Add repository
+  template:
+    src: gluster.repo
+    dest: /etc/yum.repos.d/gluster.repo

@@ -1,0 +1,12 @@
+- name: Modify all compute nodes ntp.conf
+  template:
+    src: ntp.conf
+    dest: /etc/ntp.conf
+    backup: yes
+  notify:
+  - restart nodes ntpd
+
+- name: start ntpdate daemon at boot time
+  service: 
+    name: ntpdate
+    enabled: yes

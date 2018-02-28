@@ -1,0 +1,10 @@
+docker_vg_dev:
+        - /dev/vdb
+docker_vg_name:
+        - docker-vg
+docker_vg_lv2_name:
+        - docker-pool
+docker_vg_lv_size:
+        - +100%FREE
+docker_vg_pe_size:
+        - 32

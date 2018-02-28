@@ -1,0 +1,31 @@
+- name: install docker registry
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - docker-distribution
+
+- name: start docker registry service  running after reboot
+  service:
+    name: docker-distribution
+    state: restarted
+    enabled: yes
+
+- name: start docker  service  running after reboot
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
+
+- name: create nfs mount dir for images
+  file:
+    path: /opt/images
+    state: directory
+    mode: 0755
+
+- name: mount docker images from nfs server
+  mount:
+    path: /opt/images
+    src: 192.168.122.1:/mnt/data/images
+    fstype: nfs
+    state: mounted

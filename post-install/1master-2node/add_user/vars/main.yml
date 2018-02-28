@@ -1,0 +1,7 @@
+adminuser:
+        - admin
+devuser:
+        - dev
+password:
+        - redhat
+        - dev

@@ -1,0 +1,71 @@
+说明文件：
+
+分pre-install和post-install两部分
+
+
+将etc/hosts的内容追加到你的运行这套脚本的Linux服务器的/etc/hosts中，记得按照你的环境修改里面的IP地址
+
+复制etc/ansible/hosts文件到你的运行这套脚本的Linux服务器的/etc/ansible目录下，记得按照实际环境调整
+
+需要事先配置好运行此脚本的Linux服务器到所有OCP节点的SSH互信
+
+到每一个role目录的vars目录里根据实际情况调整相应的变量，如果有没有设置成变量的配置信息，请联系我
+
+
+如何运行
+ansible-playbook site.yml
+
+如果一切执行成功，
+
+请到master节点上执行
+
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
+
+如果上述命令一切正常，请切换到post-install/1master-2node目录下，根据实际情况 修改每个role目录下的vars目录下的变量为实际值
+然后执行 ansible-playbook site.yml
+
+关于pre-install部分的工作
+	在所有节点上配置本地yum源
+	在所有节点上安装基础组件包
+	在所有节点上更新/etc/hosts
+	在所有节点上配置SSH互信
+	配置所有节点的Docker Registry客户端
+	配置master01节点为ntp服务器，其余节点通过他同步时间
+	在master01节点上配置SSH互信私钥
+ 	在所有OSE节点上配置dnsmasq
+	在所有OSE节点上设置selinux为Permissive
+	在所有OSE节点上禁用firewalld
+	在所有OSE节点上配置NTP client
+	在所有计算节点上配置docker storage
+	在公共registry上导入镜像并做相关配置（只需要运行一次，如果反复执行的情况下，可以在site.yml中注释以节约时间）
+		
+
+关于post-install部分的工作：
+	在master节点上创建admin和dev用户，口令为redhat和dev
+	重启master节点上OCP进程，以便让监控生效
+	在Registry节点上安装gitlab（只需要执行一次，反复执行请在site.yml中注释掉）
+	在所有ose节点上更新dnsmasq，加入对gitlab的解析
+
+关于pre-gluster-install部分的操作（部plabybook没有做成变量，后续会调整）
+	在所有gluster节点上配置本地yum源
+	在所有gluster节点上安装相关软件包
+	在所有gluster节点上配置ssh互信（只有公钥）
+	在所有gluster上禁用firewalld
+	在所有gluster节点上设置selinux为Permissive
+	在所有gluster节点上设置NTP client
+	在所有gluster节点上设置系统的优化模式
+	在所有gluster节点上启动gluster进程
+	在gluster-node1节点上配置gluster集群
+	在gluster-node1上部署heketi和heketi-client
+	在gluster-node1上配置heketi-client并为docker registry和jekins分别创建一个volume
+
+pre和post部门内容其实可以整合在一个目录下，分开处理只是为了让脚本逻辑更加清晰
+	
+
+gluster的pre-install部分可配合本脚本一起为OCP提供持久化存储的支持，目前没有完成配置持久化存储的ansible脚本
+
+联系方式: lchen@redhat.com
+
+
+
+

@@ -1,0 +1,5 @@
+- name: modify master's ansible hosts
+  copy:
+    src: hosts
+    dest: /etc/ansible/hosts
+    backup: yes

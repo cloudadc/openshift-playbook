@@ -1,0 +1,16 @@
+- name: install necessary system packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+      - nfs-utils
+      - net-tools
+      - ntp
+      - wget
+      - bash-completion
+      - vim
+      - unzip
+      - kexec-tools
+      - sos
+      - psacct
+      - redhat-storage-server

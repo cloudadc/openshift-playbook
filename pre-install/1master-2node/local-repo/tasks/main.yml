@@ -1,0 +1,4 @@
+- name: Add repository
+  template:
+    src: ose.repo
+    dest: /etc/yum.repos.d/ose.repo

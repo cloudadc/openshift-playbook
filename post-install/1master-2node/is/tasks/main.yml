@@ -1,0 +1,11 @@
+- name: delete all exist is
+  shell: for i in $(oc get is -n openshift --no-headers|awk '{print $1}') ; do oc delete is $i -n openshift; done
+
+- name: create from image-streams/image-streams-rhel7.json
+  shell: oc create -n openshift -f  /usr/share/openshift/examples/image-streams/image-streams-rhel7.json
+
+- name: create from jboss-image-streams.json
+  shell:  oc create -n openshift -f /usr/share/openshift/examples/xpaas-streams/jboss-image-streams.json
+  
+- name: import nosecure IS 
+  shell: for i in $(oc get is -n openshift --no-headers|awk '{print $1}'); do oc import-image $i --insecure  -n openshift;done
