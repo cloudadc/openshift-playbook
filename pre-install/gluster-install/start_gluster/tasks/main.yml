@@ -1,0 +1,5 @@
+- name: start GlusterFS daemon
+  service:
+    name: glusterd
+    state: started
+    enabled: yes

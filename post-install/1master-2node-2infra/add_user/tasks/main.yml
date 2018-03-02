@@ -1,0 +1,9 @@
+- name: add admin user to ose
+  shell: htpasswd -b /etc/origin/master/htpasswd {{adminuser.0}} {{password.0}}
+
+- name: add dev user to ose
+  shell: htpasswd -b /etc/origin/master/htpasswd {{devuser.0}} {{password.1}}
+
+- name: grant admin role to {{adminuser.0}}
+  shell: oadm policy add-cluster-role-to-user cluster-admin {{adminuser.0}}
+ 

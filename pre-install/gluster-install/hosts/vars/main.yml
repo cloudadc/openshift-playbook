@@ -1,0 +1,12 @@
+ip:
+        - 10.98.0.21
+        - 10.98.0.22
+        - 10.98.0.23
+fqdn:
+        - gluster-node1.example.com
+        - gluster-node2.example.com
+        - gluster-node3.example.com
+shorts_name:
+        - gluster-node1
+        - gluster-node2
+        - gluster-node3

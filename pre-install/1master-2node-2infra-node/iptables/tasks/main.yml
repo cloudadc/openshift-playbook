@@ -1,0 +1,23 @@
+- name: allow ntp access
+  lineinfile:
+    path: /etc/sysconfig/iptables
+    insertbefore: '^-A INPUT -j OS_FIREWALL_ALLOW'
+    line: '-A INPUT -p udp -m state --state NEW -m udp --dport 123 -j ACCEPT'
+  notify:
+  - reload iptables
+
+- name: allow dns udp port access
+  lineinfile:
+    path: /etc/sysconfig/iptables
+    insertbefore: '^-A INPUT -j OS_FIREWALL_ALLOW'
+    line: '-A INPUT -p udp -m state --state NEW -m udp --dport 53 -j ACCEPT'
+  notify:
+  - reload iptables
+
+- name: allow dns tcp port access
+  lineinfile:
+    path: /etc/sysconfig/iptables
+    insertbefore: '^-A INPUT -j OS_FIREWALL_ALLOW'
+    line: '-A INPUT -p tcp -m state --state NEW -m tcp --dport 53 -j ACCEPT'
+  notify:
+  - reload iptables

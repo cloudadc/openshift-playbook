@@ -1,0 +1,22 @@
+- name: setup heketi key
+  copy:
+    src: id_rsa
+    dest: /etc/heketi/heketi_key
+    owner: heketi
+    group: heketi
+    mode: 0400 
+
+- name: update /etc/profile for using heketi RESTAPI
+  template:
+    src: heketi.sh
+    dest: /etc/profile.d/heketi.sh
+
+- name: create heketi configuration file
+  template:
+    src: heketi.json
+    dest: /etc/heketi/heketi.json
+    backup: yes
+    owner: heketi
+    group: heketi
+  notify:
+  - restart heketi

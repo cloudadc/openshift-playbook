@@ -1,0 +1,10 @@
+ssh_key:
+  - /etc/heketi/heketi_key
+ssh_user:
+  - root
+ssh_port:
+  - 22  
+fstab:
+  - /etc/fstab
+heketi_cli_server:
+  - http://192.168.122.21:8080

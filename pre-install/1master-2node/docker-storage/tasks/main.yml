@@ -1,0 +1,26 @@
+- name: create VG docker-vg for node1 and node2
+  lvg:
+    vg: "{{docker_vg_name.0}}"
+    pvs: "{{docker_vg_dev.0}}"
+    pesize: "{{docker_vg_pe_size.0}}"
+
+- name: add config to /etc/sysconfig/docker-storage-setup
+  lineinfile:
+    path: /etc/sysconfig/docker-storage-setup
+    line:  'VG={{docker_vg_name.0}}'
+
+- name: run docker-storage-setup command
+  shell: docker-storage-setup 
+
+- name: extend docker-pool to use all free space
+  lvol:
+    vg: "{{docker_vg_name.0}}"
+    lv: "{{docker_vg_lv2_name.0}}"
+    size: "{{docker_vg_lv_size.0}}"
+    force: yes
+
+- name: start docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes

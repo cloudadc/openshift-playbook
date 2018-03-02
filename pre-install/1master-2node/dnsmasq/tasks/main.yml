@@ -1,0 +1,15 @@
+- name: add A record to dnsmasq
+  template:
+    src: openshift-cluster.conf
+    dest: /etc/dnsmasq.d/openshift-cluster.conf
+  notify:
+  - restart dnsmasq
+
+- name: update local resolve.conf
+  lineinfile:
+    path: /etc/sysconfig/network-scripts/ifcfg-{{interface.0}}
+    regexp: 'DNS1='
+    line:  'DNS1={{IP.0}}'
+  notify:
+  - restart network
+

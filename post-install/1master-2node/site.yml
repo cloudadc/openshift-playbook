@@ -1,0 +1,15 @@
+---
+- hosts: master
+  gather_facts: no
+  roles:
+         - add_user
+         - restart_master
+         - is
+           #- hosts: registry
+           #  gather_facts: no
+           #  roles:
+           #         - install_gitlab
+- hosts: ose
+  gather_facts: no
+  roles:
+         - dnsmasq

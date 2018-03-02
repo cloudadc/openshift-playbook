@@ -1,0 +1,13 @@
+- name: create heketi toplogy configure file
+  template:
+    src: topology.json
+    dest: /etc/heketi/topology.json
+ 
+- name: create heketi toplogy
+  shell: heketi-cli topology load --json=/etc/heketi/topology.json
+
+- name: create registry volume
+  shell: heketi-cli volume create --size=50 --snapshot-factor=1.2 --name=registry --gid=500
+
+- name: create jekins volume
+  shell: heketi-cli volume create --size=10 --snapshot-factor=1.2 --name=jekins --gid=500

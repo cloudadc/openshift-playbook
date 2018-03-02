@@ -1,0 +1,12 @@
+- name: install heketi
+  yum:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - heketi
+    - heketi-client
+- name: enable heketi startup at boot time
+  service:
+    name: heketi
+    state: started
+    enabled: yes

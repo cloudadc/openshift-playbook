@@ -1,0 +1,23 @@
+---
+- hosts: gluster
+  gather_facts: no
+  roles:
+         - local-repo
+         - install_os_packages
+         - hosts
+         - ssh_publickey
+         - firewalld
+         - selinux
+         - ntp
+         - tuned
+         - start_gluster
+- hosts: gluster-manager
+  gather_facts: no
+  roles:
+         - cluster
+         - heketi
+         - heketi_setup
+- hosts: gluster-manager
+  gather_facts: no
+  roles:
+         - heketi_toplogy

@@ -1,0 +1,6 @@
+- name: add gitlab.example.com to all OSE node's dnsmasq 
+  lineinfile:
+    path: /etc/dnsmasq.d/openshift-cluster.conf 
+    line: 'address=/gitlab.example.com/{{gitlab_ip.0}}'
+  notify:
+  - restart dnsmasq
