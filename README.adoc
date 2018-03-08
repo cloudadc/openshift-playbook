@@ -28,4 +28,3 @@ git push origin master
 
 * Create a pull request base on your commit, refer to https://help.github.com/articles/creating-a-pull-request/ for some help.
 
-== TODO
