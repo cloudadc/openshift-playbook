@@ -1,2 +1,6 @@
+redhat_registry:
+        - registry.access.redhat.com
+
 public_registry:
         - registry.example.com:5000
+

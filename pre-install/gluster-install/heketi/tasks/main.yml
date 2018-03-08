@@ -8,5 +8,4 @@
 - name: enable heketi startup at boot time
   service:
     name: heketi
-    state: started
     enabled: yes

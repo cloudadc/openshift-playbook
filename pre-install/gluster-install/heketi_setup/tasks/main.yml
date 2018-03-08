@@ -11,6 +11,11 @@
     src: heketi.sh
     dest: /etc/profile.d/heketi.sh
 
+    #- name: wait for port heketi become ready
+    #  wait_for: 
+    #    port: 8080
+    #    state: present
+
 - name: create heketi configuration file
   template:
     src: heketi.json

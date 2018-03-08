@@ -1,5 +1,0 @@
-- name: install ansible
-  yum:
-    name: ansible
-    state: present
-    #when: ansible_hostname=="master01"
