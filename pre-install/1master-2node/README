@@ -57,7 +57,7 @@ ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml
 	在所有gluster节点上启动gluster进程
 	在gluster-node1节点上配置gluster集群
 	在gluster-node1上部署heketi和heketi-client
-	在gluster-node1上配置heketi-client并为docker registry和jekins分别创建一个volume
+	在gluster-node1上配置heketi-client并为docker registry和jekins分别创建一个volume(只可运行一次，再运行次请注释)
 
 pre和post部门内容其实可以整合在一个目录下，分开处理只是为了让脚本逻辑更加清晰
 	
